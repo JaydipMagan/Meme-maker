@@ -2,27 +2,27 @@
 
 This is a basic meme maker I have made.
 First you have to choose which meme template to use. The **Templates** directory has the meme templates available, you can add as many memes templates as you wish
-'''
-Meme templates available:
 
-1. Professionals Have Standards
-2. Man of Quality
-...
+    Meme templates available:
 
-Enter meme template:
-'''
+    1. Professionals Have Standards
+    2. Man of Quality
+    ...
+
+    Enter meme template:
+
 
 Once you have chosen a meme template you have three options to decide where the text you want should go:
 
-'''
-Text options:
 
-1. Top text
-2. Bottom text
-3. Top and Bottom text
+    Text options:
 
-Enter option:
-'''
+    1. Top text
+    2. Bottom text
+    3. Top and Bottom text
+
+    Enter option:
+
 
 After choosing the text option you need to provide the text and the meme will be made.
 The program will open the meme so you can see it and there is an option to save the memes.
