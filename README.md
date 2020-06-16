@@ -12,7 +12,7 @@ First you have to choose which meme template to use. The **Templates** directory
     Enter meme template:
 
 
-Once you have chosen a meme template you have three options to decide where the text you want should go, by default **Impact** font is being used.
+Once you have chosen a meme template you have three options to decide where the text you want should go:
 
 
     Text options:
@@ -23,6 +23,9 @@ Once you have chosen a meme template you have three options to decide where the 
 
     Enter option:
 
+By default **Impact** font is being used, which can be downloaded from
+
+http://www.911fonts.com/font/download_ImpactRegular_5200.htm
 
 After choosing the text option you need to provide the text and the meme will be made.
 The program will open the meme so you can see it and there is an option to save the memes.
