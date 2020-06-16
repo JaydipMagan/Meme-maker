@@ -29,7 +29,7 @@ The program will open the meme so you can see it and there is an option to save 
 The **Saved** directory contains all the meme saved that were made using the program, the user choses the name
 for the meme
 
-##Further improvements
+## Further improvements
 
 * Input to decide which font to use
 
