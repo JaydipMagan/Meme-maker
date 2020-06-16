@@ -1,9 +1,10 @@
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
+import os
 
-def generate_meme(top_text, bottom_text):
+def generate_meme(template, top_text, bottom_text):
     # Load the image
-    im = Image.open("man_of_quality.png")
+    im = Image.open("Templates/"+template)
     draw = ImageDraw.Draw(im)
     im_width, im_height = im.size
 
@@ -39,9 +40,44 @@ def generate_meme(top_text, bottom_text):
     # save meme
     im.save('meme-' + im.filename.split('/')[-1])
 
-# Wrap text so that it doesn't overflow from the image and goes to new line instead
-top_text = "When you make a meme using Python"
-top_text = top_text.upper()
-bottom_text = ""
-bottom_text = bottom_text.upper()
-generate_meme(top_text, bottom_text)
+def display_options():
+    print()
+    print("1. Top text")
+    print("2. Bottom text")
+    print("3. Top and Bottom text")
+    print()
+
+def get_text():
+    display_options()
+    option = int(input("Enter option: "))
+    print()
+    top_text = ""
+    bottom_text = ""
+    if option == 1:
+        top_text = input("Enter top text: ")
+    elif option == 2:
+        bottom_text = input("Enter bottom text: ")
+    else:
+        top_text = input("Enter top text: ")
+        bottom_text = input("Enter bottom text: ")
+    top_text = top_text.upper()
+    bottom_text = bottom_text.upper()
+    return top_text, bottom_text
+
+def get_meme_template():
+    print("Meme templates available:")
+    templates = os.listdir("./Templates")
+    print()
+    for i in range(1, len(templates)):
+        name = templates[i].split(".")[0]
+        print(str(i)+".", name)
+    print()
+    option = int(input("Enter meme template: "))
+    return templates[option]
+
+print()
+print("MEME MAKER")
+print()
+template = get_meme_template()
+top_text, bottom_text = get_text()
+generate_meme(template, top_text, bottom_text)
