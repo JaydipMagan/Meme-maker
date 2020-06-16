@@ -37,15 +37,18 @@ def generate_meme(template, top_text, bottom_text):
     # Open the image
     im.show()
     # Save meme
-    save_meme()
+    save_meme(im)
 
 
-def save_meme():
+def save_meme(im):
+    print()
     save = input("Do you want to save the meme (y/n): ")
+    print()
     if save == "y":
-        name = input("Enter meme name")
+        name = input("Enter meme name: ")
     # save meme
-    im.save("Saved/" + name)
+    im.save("Saved/" + name, 'PNG')
+    print()
 
 def display_options():
     print()
