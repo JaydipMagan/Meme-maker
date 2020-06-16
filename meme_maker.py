@@ -46,9 +46,9 @@ def save_meme(im):
     print()
     if save == "y":
         name = input("Enter meme name: ")
-    # save meme
-    im.save("Saved/" + name, 'PNG')
-    print()
+        # save meme
+        im.save("Saved/" + name, 'PNG')
+        print()
 
 def display_options():
     print()
