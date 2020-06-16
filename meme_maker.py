@@ -52,6 +52,8 @@ def save_meme(im):
 
 def display_options():
     print()
+    print("Text options: ")
+    print()
     print("1. Top text")
     print("2. Bottom text")
     print("3. Top and Bottom text")
