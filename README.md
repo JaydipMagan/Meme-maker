@@ -33,9 +33,19 @@ The **Saved** directory contains all the meme saved that were made using the pro
 for the meme
 
 ## Further improvements
+This has been improved as by the suggestions. You can now create two type of memes:
 
-* Input to decide which font to use
+	MEME MAKER
 
-* Input to decide which colour the font should be
+	1. Basic
 
-Any suggestions are welcome
+	2. Advanced
+
+	Enter meme type:
+
+The **basic** meme template will be a regular meme using impact font and black color.
+The **advanced** option:
+- Will allow you to choose from a list of fonts available and more can be added from: http://www.911fonts.com
+- Will allow you to choose a specific colour for the font you want.
+
+Thanks for these suggestions, any suggestions are welcome :)
