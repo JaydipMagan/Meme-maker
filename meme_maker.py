@@ -9,7 +9,7 @@ def generate_meme(template, top_text, bottom_text):
     im_width, im_height = im.size
 
     # Load font
-    font = ImageFont.truetype(font="impact.ttf", size=int(im_height/10))
+    font = ImageFont.truetype(font="Fonts/impact.ttf", size=int(im_height/10))
 
     # Size of each character
     char_width, char_height = font.getsize('A')
@@ -23,7 +23,10 @@ def generate_meme(template, top_text, bottom_text):
     for line in top_lines:
         line_width, line_height = font.getsize(line)
         x = (im_width - line_width)/2
-        draw.text((x, y), line, fill='black', font=font)
+        colour = 'black'
+        if not basic:
+            colour = get_colour()
+        draw.text((x, y), line, fill=colour, font=font)
         y += line_height
 
     # Bottom text
@@ -31,14 +34,16 @@ def generate_meme(template, top_text, bottom_text):
     for line in bottom_lines:
         line_width, line_height = font.getsize(line)
         x = (im_width - line_width)/2
-        draw.text((x,y), line, fill='black', font=font)
+        colour = 'black'
+        if not basic:
+            colour = get_colour()
+        draw.text((x,y), line, fill=colour, font=font)
         y += line_height
 
     # Open the image
     im.show()
     # Save meme
     save_meme(im)
-
 
 def save_meme(im):
     print()
@@ -49,6 +54,10 @@ def save_meme(im):
         # save meme
         im.save("Saved/" + name, 'PNG')
         print()
+
+def get_colour():
+    return input("Enter colour: ")
+
 
 def display_options():
     print()
@@ -80,16 +89,25 @@ def get_meme_template():
     print("Meme templates available:")
     templates = os.listdir("./Templates")
     print()
-    for i in range(1, len(templates)):
+    for i in range(0, len(templates)):
         name = templates[i].split(".")[0]
         print(str(i)+".", name)
     print()
     option = int(input("Enter meme template: "))
     return templates[option]
 
+def meme_type():
+    print("1. Basic")
+    print("2. Advanced")
+    print()
+    type = int(input("Enter meme type: "))
+    print()
+    return type == 1
+
 print()
 print("MEME MAKER")
 print()
+basic = meme_type()
 template = get_meme_template()
 top_text, bottom_text = get_text()
 generate_meme(template, top_text, bottom_text)
