@@ -9,8 +9,12 @@ def generate_meme(template, top_text, bottom_text):
     im_width, im_height = im.size
 
     # Load font
-    font = ImageFont.truetype(font="Fonts/impact.ttf", size=int(im_height/10))
+    use_font = "Fonts/impact.ttf"
+    if not basic:
+        use_font = "Fonts/"+get_font()
+        print()
 
+    font = ImageFont.truetype(font=use_font, size=int(im_height/10))
     # Size of each character
     char_width, char_height = font.getsize('A')
     char_per_line = im_width // char_width
@@ -26,6 +30,7 @@ def generate_meme(template, top_text, bottom_text):
         colour = 'black'
         if not basic:
             colour = get_colour()
+            print()
         draw.text((x, y), line, fill=colour, font=font)
         y += line_height
 
@@ -95,6 +100,18 @@ def get_meme_template():
     print()
     option = int(input("Enter meme template: "))
     return templates[option]
+
+def get_font():
+    print("Fonts available:")
+    fonts = os.listdir("./Fonts")
+    print()
+    for i in range(0, len(fonts)):
+        name = fonts[i].split(".")[0]
+        print(str(i)+".", name)
+    print()
+    option = int(input("Enter font: "))
+    return fonts[option]
+
 
 def meme_type():
     print("1. Basic")
