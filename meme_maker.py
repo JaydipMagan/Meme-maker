@@ -2,15 +2,14 @@ from PIL import Image, ImageDraw, ImageFont
 import textwrap
 import os
 import ArgumentParser
-
-
 class mememaker:
 
     def __init__(self):
         self.help_message = "mememaker - Creates a meme using the template and text provided"
         self.usage_message = "Try follow : mememaker [template] [text]"
         self.name = "mememaker"
-        templates = os.listdir("./Templates")
+        self.path = os.path.dirname(os.path.abspath(__file__))
+        templates = os.listdir(self.path+"/Templates")
         self.templates = {i : templates[i] for i in range(len(templates))}
 
 
@@ -21,25 +20,26 @@ class mememaker:
 
     def parse_args(self,string):
         parser = ArgumentParser.ArgumentParser()
-        opt_args = parser.add_argument_group("Optional arguments")
-        opt_args.add_argument('-temp',"--template", type=int, help="The meme template to use", choices=template_choices, required=True, default=0)
-        opt_args.add_argument('-text',"--text", type=str, help="The meme text", required=True, default="Meme text")
+        req_args = parser.add_argument_group("Required arguments")
+        req_args.add_argument('-temp',"--template", type=int, help="The meme template to use", choices=self.templates, required=True, default=0)
+        req_args.add_argument('-text',"--text", type=str, help="The meme text", required=True, default="Meme text")
         args = parser.parse_args(string.split())
-        self.template = args.temp
+        self.template = args.template
         self.text = args.text
-
+        return ("image",self.generate_meme())
+    
     def generate_meme(self):
         # Load the image
-        im = Image.open("Templates/"+self.templates[self.template])
+        im = Image.open(self.path+"/Templates/"+self.templates[self.template])
         draw = ImageDraw.Draw(im)
         im_width, im_height = im.size
         # Load font
-        use_font = "Fonts/impact.ttf"
+        use_font = self.path+"/Fonts/impact.ttf"
         font = ImageFont.truetype(font=use_font, size=int(im_height/10))
         # Size of each character
         char_width, char_height = font.getsize('A')
         char_per_line = im_width // char_width
-        top_lines = textwrap.wrap(top_text, char_per_line)
+        top_lines = textwrap.wrap(self.text, char_per_line)
         # Top text
         y = 10
         for line in top_lines:
@@ -49,14 +49,21 @@ class mememaker:
             draw.text((x, y), line, fill=colour, font=font)
             y += line_height
         # Open the image
-        im.show()
+        # im.show()
         # Save meme
-        self.save_meme(im)
+        return self.save_meme_(im,"meme.png")
 
+    def save_meme_(self,im,name):
+        if not os.path.exists(self.path+"/Saved"):
+            os.makedirs(self.path+"/Saved")
+        # save meme
+        im.save(self.path+"/Saved/" + name, 'PNG')
+        return self.path+"/Saved/"+name     
+      
     def save_meme(self, im):
         name = input("Enter meme name: ")
         # save meme
-        im.save("Saved/" + name, 'PNG')
+        im.save(self.path+"/Saved/" + name, 'PNG')
         print()
 
     def help_message(self):
