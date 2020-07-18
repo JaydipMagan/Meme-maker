@@ -23,7 +23,10 @@ class mememaker:
         req_args = parser.add_argument_group("Required arguments")
         req_args.add_argument('-temp',"--template", type=int, help="The meme template to use", choices=self.templates, required=True, default=0)
         req_args.add_argument('-text',"--text", type=str, help="The meme text", required=True, default="Meme text")
-        args = parser.parse_args(string.split())
+        try:
+            args = parser.parse_args(string.split())
+        except:
+            return("error",self.usage_message)
         self.template = args.template
         self.text = args.text
         return ("image",self.generate_meme())
