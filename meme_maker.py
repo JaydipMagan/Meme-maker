@@ -18,13 +18,29 @@ class mememaker:
         for k, v in self.templates.items():
             print(k, ".", v)
 
+    def split(self,string):
+        args = string.split()
+        text = ""
+        append,index = False,0
+        for i in range(0,len(args)):
+            x = args[i]
+            if x[0]=="'" or x[0]=='"':
+                append = True 
+                index = i
+            if append==True:
+                text+= x+" "
+            if x[-1]=="'" or x[-1]=='"':
+                append = False
+        args[index] = text   
+        return args[:index+1]
+    
     def parse_args(self,string):
         parser = ArgumentParser.ArgumentParser()
         req_args = parser.add_argument_group("Required arguments")
         req_args.add_argument('-temp',"--template", type=int, help="The meme template to use", choices=self.templates, required=True, default=0)
         req_args.add_argument('-text',"--text", type=str, help="The meme text", required=True, default="Meme text")
         try:
-            args = parser.parse_args(string.split())
+            args = parser.parse_args(self.split(string))
         except:
             return("error",self.usage_message)
         self.template = args.template
