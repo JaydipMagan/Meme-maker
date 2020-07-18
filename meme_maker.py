@@ -25,15 +25,15 @@ class mememaker:
         for i in range(0,len(args)):
             x = args[i]
             if x[0]=="'" or x[0]=='"':
-                append = True 
+                append = True
                 index = i
             if append==True:
                 text+= x+" "
             if x[-1]=="'" or x[-1]=='"':
                 append = False
-        args[index] = text   
+        args[index] = text
         return args[:index+1]
-    
+
     def parse_args(self,string):
         parser = ArgumentParser.ArgumentParser()
         req_args = parser.add_argument_group("Required arguments")
@@ -46,7 +46,7 @@ class mememaker:
         self.template = args.template
         self.text = args.text
         return ("image",self.generate_meme())
-    
+
     def generate_meme(self):
         # Load the image
         im = Image.open(self.path+"/Templates/"+self.templates[self.template])
@@ -57,6 +57,8 @@ class mememaker:
         font = ImageFont.truetype(font=use_font, size=int(im_height/10))
         # Size of each character
         char_width, char_height = font.getsize('A')
+        char_width -= len(self.text)//5
+        char_height -= len(self.text)//5
         char_per_line = im_width // char_width
         top_lines = textwrap.wrap(self.text, char_per_line)
         # Top text
@@ -77,8 +79,8 @@ class mememaker:
             os.makedirs(self.path+"/Saved")
         # save meme
         im.save(self.path+"/Saved/" + name, 'PNG')
-        return self.path+"/Saved/"+name     
-      
+        return self.path+"/Saved/"+name
+
     def save_meme(self, im):
         name = input("Enter meme name: ")
         # save meme
