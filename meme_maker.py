@@ -57,8 +57,8 @@ class mememaker:
         font = ImageFont.truetype(font=use_font, size=int(im_height/10))
         # Size of each character
         char_width, char_height = font.getsize('A')
-        char_width -= len(self.text)//5
-        char_height -= len(self.text)//5
+        char_width -= len(self.text)//3
+        char_height -= len(self.text)//3
         char_per_line = im_width // char_width
         top_lines = textwrap.wrap(self.text, char_per_line)
         # Top text
