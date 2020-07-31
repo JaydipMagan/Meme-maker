@@ -42,10 +42,10 @@ class mememaker:
         try:
             args = parser.parse_args(self.split(string))
         except:
-            return("error",self.usage_message)
+            return {"media":"error","text":self.usage_message,"media_location":""}
         self.template = args.template
         self.text = args.text
-        return ("image",self.generate_meme())
+        return {"media":"image","text":"","media_location":self.generate_meme()}
 
     def generate_meme(self):
         # Load the image
